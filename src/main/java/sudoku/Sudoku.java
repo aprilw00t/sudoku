@@ -24,8 +24,16 @@ public class Sudoku {
 		return s;
 	}
 
+	public boolean isEmpty(int x, int y) {
+		return grid[y][x] == 0;
+	}
 
 	public boolean setValue(int x, int y, int value) {
+		if (value == 0) {
+			grid[y][x] = 0;
+			return true;
+		}
+
 		for (int cell : grid[y]) {
 				if (cell == value) {
 					return false;
@@ -52,4 +60,11 @@ public class Sudoku {
 		return true;
 	}
 
+	public int getValue(int x, int y) {
+		return grid[y][x];
+	}
+
+	public int size() {
+		return baseSize * baseSize;
+	}
 }
