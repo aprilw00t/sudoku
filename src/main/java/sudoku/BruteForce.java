@@ -1,8 +1,12 @@
 package sudoku;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class BruteForce {
 
 	private final Sudoku sudoku;
+	private Set<XY> presetCoordinates;
 	private XY currentPosition;
 	private final int max;
 
@@ -10,6 +14,15 @@ public class BruteForce {
 		this.sudoku = sudoku;
 		this.currentPosition = new XY(0, 0);
 		this.max = sudoku.size();
+		this.presetCoordinates = new HashSet<XY>();
+
+		for (int r = 0; r < max; r++) {
+			for (int c = 0; c < max; c++) {
+				if (!sudoku.isEmpty(c, r)) {
+					presetCoordinates.add(new XY(c, r));
+				}
+			}
+		}
 	}
 
 	public XY nextCoordinate(XY currentCoordinate) {
@@ -49,7 +62,9 @@ public class BruteForce {
 			if (sudoku.isEmpty(currentPosition.x, currentPosition.y)) {
 				while (!bruteForceElement()) {
 					sudoku.setValue(currentPosition.x, currentPosition.y, 0);
-					currentPosition = lastCoordinate(currentPosition);
+					do {
+						currentPosition = lastCoordinate(currentPosition);
+					} while (presetCoordinates.contains(currentPosition));
 				}
 			}
 			currentPosition = nextCoordinate(currentPosition);

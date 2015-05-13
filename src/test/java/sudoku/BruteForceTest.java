@@ -13,7 +13,7 @@ public class BruteForceTest {
 
 	@Before
 	public void setUp() {
-		sudoku = new Sudoku(5);
+		sudoku = new Sudoku(3);
 		bruteForce = new BruteForce(sudoku);
 	}
 
@@ -35,6 +35,15 @@ public class BruteForceTest {
 
 	@Test
 	public void testBruteForce() {
+		bruteForce.bruteForce();
+
+		System.out.println(sudoku.toString());
+	}
+
+	@Test
+	public void testBruteForceWithPresets() {
+		sudoku.setValue(0, 0, 4);
+		sudoku.setValue(1, 1, 1);
 		bruteForce.bruteForce();
 
 		System.out.println(sudoku.toString());
