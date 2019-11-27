@@ -3,7 +3,7 @@ defaultTasks 'check'
 apply plugin: 'java'
 
 version = 1.0
-sourceCompatibility = 1.6
+sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
