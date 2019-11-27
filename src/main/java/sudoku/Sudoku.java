@@ -7,11 +7,18 @@ public class Sudoku {
 
     private final Integer numberOfCells;
 
-    Sudoku(Integer numberOfCells){
+    public List<Cell> getGrid() {
+        return grid;
+    }
 
+    private final List<Cell> grid;
+
+    Sudoku(Integer numberOfCells, Integer cellSize){
+grid = new ArrayList<>(numberOfCells);
         this.numberOfCells = numberOfCells;
         for(int i = 0; i<numberOfCells; i++){
-
+Cell cell = new Cell(cellSize);
+grid.add(cell);
         }
     }
 
@@ -22,20 +29,22 @@ public class Sudoku {
     }
 
     public boolean checkCell(Cell cellToCheck, Integer numberInserted){
-List<Integer> rowOne = cellToCheck.getCellRowOne();
-        List<Integer> rowTwo = cellToCheck.getCellRowTwo();
+List<Integer> rowOne = cellToCheck.getCellRow(1);
+        List<Integer> rowTwo = cellToCheck.getCellRow(2);
 
         if(rowOne.contains(numberInserted) || rowTwo.contains(numberInserted)){
             return false;
         }
         else{
-            cellToCheck.getCellRowOne().add(numberInserted);
 return true;
         }
     }
 
-    public void addNumberToCell(){
+    public void addNumberToCell(int numberToAdd, int cellNumber, int rowNumber, int columNumber){
 
+        grid.get(cellNumber-1).getCellRow(rowNumber).add(columNumber-1, numberToAdd);
+        System.out.println(grid.get(cellNumber-1).getCellRow(1));
+        //grid.get(cellNumber).getCellRowOne().add(columNumber, numberToAdd);
     }
 
 

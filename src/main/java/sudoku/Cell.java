@@ -7,25 +7,22 @@ public class Cell {
     List<Integer> cellRowOne;
     List<Integer> cellRowTwo;
 
-    public List<Integer> getCellRowOne() {
-        return cellRowOne;
+
+    public List<Integer> getCellRow(int cellRow) {
+        if(cellRow == 1){
+        return cellRowOne;}
+        else{
+            return cellRowTwo;
+        }
     }
 
-    public void setCellRowOne(List<Integer> cellRowOne) {
-        this.cellRowOne = cellRowOne;
-    }
-
-    public List<Integer> getCellRowTwo() {
-        return cellRowTwo;
-    }
-
-    public void setCellRowTwo(List<Integer> cellRowTwo) {
-        this.cellRowTwo = cellRowTwo;
-    }
-
-    Cell(){
-        cellRowOne  = new ArrayList<>(3);
-        cellRowTwo = new ArrayList<>(3);
+    Cell(Integer cellSize){
+        cellRowOne  = new ArrayList<>(cellSize -1);
+        cellRowTwo = new ArrayList<>(cellSize-1);
+        for (int i = 0; i < cellSize -1; i++) {
+            cellRowOne.add(i, 0);
+            cellRowTwo.add(i, 0);
+        }
     }
 
 }
