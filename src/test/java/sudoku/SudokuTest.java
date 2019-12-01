@@ -24,16 +24,16 @@ public class SudokuTest {
 
     @Test
     public void checksAgainstInvalidCell() {
-        Cell cellToCheck = new Cell(4,1, 1);
-        cellToCheck.getCellRow(2).add(9);
-        boolean isValid = sudoku.checkCell(cellToCheck, 9);
+
+        sudoku.addNumberToCell(2,1,1,1,1);
+        boolean isValid = sudoku.checkCell(1, 1 , 2);
         Assertions.assertThat(isValid).isFalse();
     }
 
     @Test
     public void checksAgainstValidCell() {
-        Cell cellToCheck = new Cell(4, 1, 1);
-        boolean isValid = sudoku.checkCell(cellToCheck, 8);
+
+        boolean isValid = sudoku.checkCell(1,1,3);
         Assertions.assertThat(isValid).isTrue();
     }
 
@@ -100,6 +100,41 @@ sudoku.showPuzzle();
     }
     @Test
     public void validatesNumberAndRejects(){
-
+        sudoku.addNumberToCell(2,2,2,1,1);
+sudoku.showPuzzle();
+        Assertions.assertThat(sudoku.validateMyNumber(2,3,3)).isFalse();
     }
+    @Test
+    public void validatesNumberAndPlacesNumber(){
+        sudoku.addNumberToCell(2,2,2,1,1);
+        Assertions.assertThat(sudoku.validateMyNumber(5,4,3)).isTrue();
+    Assertions.assertThat(sudoku.getGrid().get(3).getCellRow(1).get(1)).isEqualTo(5);
+    }
+@Test
+    public void checkForNumbersWhenOneIsAlreadyThere(){
+    sudoku.addNumberToCell(2,1,1,2,1);
+    Assertions.assertThat(sudoku.checkForEmptyCell(1,1,2,1)).isFalse();
+}
+
+    @Test
+    public void checkForNumbersWhenCellIsEmpty(){
+        sudoku.addNumberToCell(2,2,2,1,1);
+
+       Assertions.assertThat(sudoku.checkForEmptyCell(1,2,1,1)).isTrue();
+    }
+
+
+    @Test
+    public void validatesNumberAndRejectsWhenCellIsAlreadyFull(){
+        sudoku.addNumberToCell(2,2,2,1,1);
+
+        Assertions.assertThat(sudoku.validateMyNumber(2,3,3)).isFalse();
+    }
+    /*
+    * need to sout the puzzle properly
+    * need to make it work with a different sized grid
+    * need to stop people placing incorrect numbers
+     */
+
+
 }
