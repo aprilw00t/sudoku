@@ -46,19 +46,22 @@ public class Sudoku {
         return sudoku.toString();
     }
 
-    public boolean checkCell(int cellRowNumber, int cellColumnNumber, Integer numberInserted) {
+    public boolean checkCellAndNumber(int cellRowNumber, int cellColumnNumber, Integer numberInserted) {
 boolean check = false;
         for (Cell cellInGrid : grid) {
-            if(cellInGrid.getCellRowNumber() == cellRowNumber && cellInGrid.getCellColumnNumber() == cellColumnNumber)
-            {
-        List<Integer> rowOne = cellInGrid.getCellRow(1);
-        List<Integer> rowTwo = cellInGrid.getCellRow(2);
+            if(cellInGrid.getCellRowNumber() == cellRowNumber && cellInGrid.getCellColumnNumber() == cellColumnNumber) {
+                List<Integer> rowOne = cellInGrid.getCellRow(1);
+                List<Integer> rowTwo = cellInGrid.getCellRow(2);
 
-        if (rowOne.contains(numberInserted) || rowTwo.contains(numberInserted)) {
-            check = false;
-        } else {
-            check = true;
-        }}
+                if (rowOne.contains(numberInserted) || rowTwo.contains(numberInserted)) {
+                    check = false;
+                } else if (numberInserted < 1 || numberInserted > (numberOfCellsInEachRow * cellSize)) {
+                    System.out.println("invalid number");
+                    check = false;
+                } else {
+                    check = true;
+                }
+            }
     }
     return check;}
 
@@ -109,16 +112,16 @@ boolean check = false;
 
         if(cellInGrid.getCellRowNumber() == cellRowNumber && cellInGrid.getCellColumnNumber() == cellColumnNumber)
         {
-            if(cellInGrid.getCellRow(rowNumberInsideCell).get(cellColumnNumber-1).equals(0)){
+            if(cellInGrid.getCellRow(rowNumberInsideCell).get(columnNumberInsideCell-1).equals(0)){
                 check = true;
             }
             else{
                 check = false;
-
+                System.out.println("already a number here");
             }
         }
         }
-        System.out.println("already a number here");
+
         return check;
     }
 
@@ -135,7 +138,7 @@ boolean check = false;
         Integer rowNumberInsideCell = (int)((cellSize) * ((verticalPlace / cellSize) - (cellRowNumber - 1)));
 boolean rowCheck = checkRow(cellRowNumber, rowNumberInsideCell, number);
 boolean columnCheck = checkColumn(cellColumnNumber, columnNumberInsideCell, number);
-boolean cellCheck = checkCell(cellColumnNumber,cellRowNumber, number);
+boolean cellCheck = checkCellAndNumber(cellColumnNumber,cellRowNumber, number);
 boolean checkForEmptyCell = checkForEmptyCell(cellRowNumber, cellColumnNumber, rowNumberInsideCell, columnNumberInsideCell);
 if(rowCheck&&columnCheck&&cellCheck&&checkForEmptyCell){
     addNumberToCell(number, cellRowNumber, cellColumnNumber,  rowNumberInsideCell, columnNumberInsideCell);
