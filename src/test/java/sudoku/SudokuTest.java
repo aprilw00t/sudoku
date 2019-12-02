@@ -6,7 +6,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 public class SudokuTest {
-
+//
     private Sudoku sudoku;
 
     @Before
@@ -22,8 +22,8 @@ public class SudokuTest {
         sudoku.addNumberToCell(3, 2, 1, 1, 1);
         sudoku.addNumberToCell(1, 2, 1, 2, 1);
         String result = sudoku.showPuzzle();
-      //  Assertions.assertThat(result).contains("____\n____\n____\n____");
-      //  Assertions.assertThat(result.equals("____\n____\n____\n____")).isTrue();
+
+
     }
 
     @Test
